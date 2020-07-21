@@ -40,17 +40,6 @@ app.put('/image', (req, res) => { image.handleImage(req, res, db) });
 
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res, db) });
 
-app.listen(3000, () => {
-    console.log('running smoothly on port 3000');
+app.listen(process.env.PORT, () => {
+    console.log(`running smoothly on port ${process.env.PORT}`);
 });
-
-
-/* API design
-endpoint --> protocol & result:
-
-/ --> res = this is working
-/signin --> POST success/fail
-/register --> POST user
-/profile/:userId --> GET = user
-/image --> PUT --> user
-*/
