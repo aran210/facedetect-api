@@ -36,6 +36,6 @@ app.put('/image', (req, res) => { image.handleImage(req, res, db) });
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res, db) });
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log(`running smoothly on port ${process.env.PORT}`);
-    console.log(database, process.env.DATABASE_URL);
+    // console.log(`running smoothly on port ${process.env.PORT}`);
+    console.log(`database at ${process.env.DATABASE_URL}`);
 });
