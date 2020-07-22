@@ -13,23 +13,22 @@ handleRegister = (req, res, db, bcrypt) => {
         .into('login')
         .returning('email')
         .then(loginEmail => {
-            return trx.insert({
+            return trx('users')
+            .returning('*')
+            .insert({
                 email: loginEmail[0],
                 name: name,
                 joined: new Date(),
                 entries: 0
             })
-            .into('login')
-            .returning('*')
             .then(user => {
                 res.json(user[0]);
             })
         })
-        
+        .then(trx.commit)
+        .catch(trx.rollback)
     })
-    .then(trx.commit)
-    // .catch(trx.rollback)
-    .catch(err => { trx.rollback; res.status(400).json('unable to register (server)') })
+    .catch(err => res.status(400).json('unable to register (server)'))
 }
 
 module.exports = {
