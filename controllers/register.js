@@ -13,7 +13,7 @@ handleRegister = (req, res, db, bcrypt) => {
         .into('login')
         .returning('email')
         .then(loginEmail => {
-            return trx('users')
+             trx('users')
             .returning('*')
             .insert({
                 email: loginEmail[0],
@@ -22,7 +22,7 @@ handleRegister = (req, res, db, bcrypt) => {
                 entries: 0
             })
             .then(user => {
-                res.json(user[0]);
+                return res.json(user[0]);
             })
         })
         .then(trx.commit)
