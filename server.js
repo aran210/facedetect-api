@@ -17,6 +17,15 @@ const db = knex({
       }
 });
 
+// const db = knex({
+//     client: 'pg',					
+//     connection: {
+//         host: '127.0.0.1',
+//         user: 'aran',
+//         password: '',
+//         database: 'facedetect-db'
+//     }
+// });
 
 const app = express();
 app.use(bodyParser.json());
@@ -35,6 +44,9 @@ app.put('/image', (req, res) => { image.handleImage(req, res, db) });
 
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res, db) });
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log(`running smoothly on port ${process.env.PORT}`);
+const PORT = process.env.PORT;
+// const PORT = 3000;
+
+app.listen(PORT, () => {
+    console.log(`running smoothly on port ${PORT}`);
 });
