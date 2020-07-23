@@ -9,7 +9,7 @@ const signin = require('./controllers/signin.js');
 const profile = require('./controllers/profile.js');
 const image = require('./controllers/image.js');
 
-const db = knex ({
+const db = knex({
     client: 'pg',					
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.get('/', (req, res) => { res.send("It works!") });
+app.get('/', (req, res) => { res.send(process.env.DATABASE_URL) });
 
 app.post('/signin', signin.handleSignIn(db, bcrypt) );
 
